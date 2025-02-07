@@ -7,9 +7,15 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddSingleton<ICounter, SingletonCounter>();
-builder.Services.AddScoped<ICounter, ScopedCounter>();
-builder.Services.AddTransient<ICounter, TransientCounter>();
+//When you register all three implementations under the same interface (ICounter)
+// but with different lifetimes, 
+// it doesn't know which implementation to inject,
+// as each request could potentially have a different version of ICounter
+
+//knows which implementation to inject based on the type requested
+builder.Services.AddSingleton<SingletonCounter>();
+builder.Services.AddScoped<ScopedCounter>();
+builder.Services.AddTransient<TransientCounter>();
 
 builder.Services.AddControllers();
 

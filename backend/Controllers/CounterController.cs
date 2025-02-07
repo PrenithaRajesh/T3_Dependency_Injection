@@ -1,3 +1,4 @@
+using backend.Models;
 using backend.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,38 +16,20 @@ namespace backend.Controllers{
             _singletonCounter = singletonCounter;
         }
 
-        [HttpGet("scoped")]
-        public int GetScoped(){
-            return _scopedCounter.Get();
+        [HttpGet("getall")]
+        public CounterResponseDTO GetAllCounters(){
+            return new CounterResponseDTO{
+                Scoped = _scopedCounter.Get(),
+                Transient = _transientCounter.Get(),
+                Singleton = _singletonCounter.Get()
+            };
         }
 
-        [HttpGet("transient")]
-        public int GetTransient(){
-            return _transientCounter.Get();
-        }
-
-        [HttpGet("singleton")]
-        public int GetSingleton(){
-            return _singletonCounter.Get();
-        }
-
-        [HttpPost("scoped")]
-        public int IncrementScoped(){
+        [HttpPost("incrementall")]
+        public void IncrementAll(){
             _scopedCounter.Increment();
-            return _scopedCounter.Get();
-        }
-
-        [HttpPost("transient")]
-        public int IncrementTransient(){
             _transientCounter.Increment();
-            return _transientCounter.Get();
-        }
-
-        [HttpPost("singleton")]
-        public int IncrementSingleton(){
             _singletonCounter.Increment();
-            return _singletonCounter.Get();
         }
-
     }
 }
