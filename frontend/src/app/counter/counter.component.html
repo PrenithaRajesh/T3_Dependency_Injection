@@ -1,1 +1,32 @@
-<p>counter works!</p>
+<h1>Dependency Injection with PR</h1>
+
+<hr>
+
+SCOPED COUNTER
+<div class="main-counter-display">
+    {{ response.scoped }}
+</div>
+
+<button (click)="increment()">Increment</button>
+
+<div class="scoped">Scoped</div>
+<p>
+    <span *ngFor="let item of scopedAll; let last = last">
+        {{ item }}<span *ngIf="!last">, </span>
+    </span>
+</p>
+
+<div class="transient">Transient</div>
+<p>
+    <span *ngFor="let item of transientAll; let last = last">
+        {{ item }}<span *ngIf="!last">, </span>
+    </span>
+</p>
+
+<div class="singleton">Singleton</div>
+<p>
+    <span *ngFor="let item of singletonAll; let last = last">
+        {{ item }}<span *ngIf="!last">, </span>
+    </span>
+</p>
+
