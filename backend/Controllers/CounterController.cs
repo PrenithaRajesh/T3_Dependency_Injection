@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace backend.Controllers{
     [ApiController]
-    [Route("[controller]")]
+    [Route("/api/[controller]")]
     public class CounterController : ControllerBase{
         private readonly ScopedCounter _scopedCounter;
         private readonly TransientCounter _transientCounter;
